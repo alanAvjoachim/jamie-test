@@ -1,0 +1,33 @@
+{
+  "name": "jamie-core",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "dev:functions": "npm run build:watch --prefix functions | firebase emulators:start",
+    "dev:app": "cd app && yarn electron:serve",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "dev": "firebase use default && concurrently \"yarn dev:functions\" \"yarn dev:app\"",
+    "functions:auto-fix": "cd functions && npm run lint -- --fix",
+    "deploy": "firebase use production && firebase deploy && firebase use default",
+    "app:build": "cd app && yarn electron:build -p never",
+    "app:build:all": "cd app && yarn electron:build --win nsis -p never",
+    "app:build:windows": "cd app && yarn electron:build -w -p never",
+    "app:release:mac": "cd app && yarn electron:build -m -p always",
+    "app:release:windows": "cd app && yarn electron:build -w -p always",
+    "app:release:all": "cd app && yarn electron:build --win nsis --mac -p always"
+  },
+  "repository": "https://github.com/alanAvjoachim/jamie-test.git",
+  "author": "Louis Morgner <62328448+louismorgner@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "electron-notarize": "^1.2.2"
+  },
+  "dependencies": {
+    "audioconcat": "^0.1.4",
+    "concurrently": "^7.5.0",
+    "electron-builder-squirrel-windows": "^24.0.0-alpha.10"
+  },
+  "build": "electron-builder build --win --publish never",
+  "deploy": "electron-builder build --win --publish always"
+}

@@ -1,0 +1,41 @@
+name: Build electron app
+on:
+  push:
+    branches:
+      - releases
+
+jobs:
+  build_on_mac:
+    runs-on: macos-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@master
+        with:
+          node-version: 16
+      - name: install dependencies
+        run: yarn install && cd app && yarn install
+      - name: build
+        env: # Or as an environment variable
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLEID: ${{ secrets.APPLEID }}
+          APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: yarn app:release:mac
+  build_for_windows:
+    runs-on: macos-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@master
+        with:
+          node-version: 16
+      - name: install dependencies
+        run: yarn install && cd app && yarn install
+      - name: build
+        env: # Or as an environment variable
+          CSC_LINK: ${{ secrets.CSC_LINK_WIN }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD_WIN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: yarn app:release:windows

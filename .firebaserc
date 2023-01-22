@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "jamie-core-staging",
+    "production": "jamie-core"
+  }
+}

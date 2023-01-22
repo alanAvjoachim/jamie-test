@@ -1,0 +1,17 @@
+name: Linting Check
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+
+jobs:
+  build:
+    name: "Linting of functions"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install dependencies
+        run: cd functions && npm install
+      - name: Lint functinos
+        run: cd functions && npm run lint

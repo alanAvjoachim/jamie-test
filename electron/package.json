@@ -1,0 +1,22 @@
+{
+  "name": "jamie-core",
+  "version": "0.0.1",
+  "description": "Personal AI assistant for meeting summaries",
+  "main": "main.js",
+  "repository": "https://github.com/wespond/jamie-core.git",
+  "author": "Louis Morgner <62328448+louismorgner@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"cd app && yarn dev\" \"electron .\""
+  },
+  "devDependencies": {
+    "concurrently": "^7.4.0",
+    "electron": "^21.1.0"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "menubar": "^9.2.3",
+    "node-notifier": "^10.0.1"
+  }
+}

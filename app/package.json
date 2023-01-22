@@ -1,0 +1,61 @@
+{
+  "name": "jamie",
+  "description": "your personal AI assistant that generates meeting summaries in seconds.",
+  "version": "2.0.0",
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "dev": "vite",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
+    "preview": "vite preview --port 4173"
+  },
+  "main": "background.js",
+  "author": "jamie <hey@meetjamie.ai> (https://meetjamie.ai/)",
+  "dependencies": {
+    "@headlessui/vue": "^1.7.3",
+    "@heroicons/vue": "^2.0.12",
+    "@tiptap/extension-placeholder": "^2.0.0-beta.199",
+    "@tiptap/starter-kit": "^2.0.0-beta.199",
+    "@tiptap/vue-3": "^2.0.0-beta.199",
+    "@vue/cli-service": "^5.0.8",
+    "analytics-node": "^6.2.0",
+    "axios": "^1.1.3",
+    "electron-builder-squirrel-windows": "^24.0.0-alpha.10",
+    "electron-store": "^8.1.0",
+    "electron-unhandled": "^4.0.1",
+    "electron-updater": "^5.3.0",
+    "extendable-media-recorder": "^7.0.3",
+    "extendable-media-recorder-wav-encoder": "^7.0.76",
+    "firebase": "^9.12.1",
+    "menubar": "^9.2.3",
+    "moment": "^2.29.4",
+    "nanoid": "^4.0.0",
+    "pinia": "^2.0.21",
+    "squirrel": "^1.0.0",
+    "update-electron-app": "^2.0.1",
+    "vue": "^3.2.38",
+    "vue-router": "^4.1.5",
+    "vue-shepherd": "^2.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.3",
+    "@vue/cli": "^5.0.8",
+    "autoprefixer": "^10.4.12",
+    "electron": "^21.2.2",
+    "electron-devtools-installer": "^3.1.0",
+    "electron-notarize": "^1.2.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.0.9",
+    "vue-cli-plugin-electron-builder": "~2.1.1"
+  },
+  "resolutions": {
+    "electron-builder": "23.0.2"
+  }
+}
