@@ -39,7 +39,7 @@ module.exports = {
             provider: "github",
             private: false,
             owner: "louismorgner",
-            repo: "jamie-release"
+            repo: "jamie-test"
           }
         ],
         dmg: {
