@@ -559,6 +559,7 @@ function splitAppVersion(appVersion) {
   }
 }
 
+
 function checkEventUpdateDownload() {
   setInterval(() => {
     console.log("update-downloaded event triggered....");
