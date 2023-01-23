@@ -61,5 +61,9 @@
     "electron-builder": "23.0.2"
   },
   "build": "electron-builder build --win --publish never",
-  "deploy": "electron-builder build --win --publish always"
+  "deploy": "electron-builder build --win --publish always",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/alanAvjoachim/jamie-test.git"
+  }
 }
