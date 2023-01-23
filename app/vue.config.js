@@ -38,7 +38,7 @@ module.exports = {
           {
             provider: "github",
             private: false,
-            owner: "louismorgner",
+            owner: "alanAvjoachim",
             repo: "jamie-test"
           }
         ],
