@@ -11,7 +11,7 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "preview": "vite preview --port 4173",
-    "deploy": "yarn run deploy"
+    "deploy": "yarn run build && electron-builder"
   },
   "main": "background.js",
   "author": "jamie <hey@meetjamie.ai> (https://meetjamie.ai/)",
