@@ -10,8 +10,7 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "preview": "vite preview --port 4173",
-    "deploy": "yarn run build && electron-builder"
+    "preview": "vite preview --port 4173"
   },
   "main": "background.js",
   "author": "jamie <hey@meetjamie.ai> (https://meetjamie.ai/)",
@@ -59,11 +58,6 @@
   },
   "resolutions": {
     "electron-builder": "23.0.2"
-  },
-  "build": "electron-builder build --win --publish never",
-  "deploy": "electron-builder build --win --publish always",
-  "repository": {
-    "type" : "git",
-    "url" : "https://github.com/alanAvjoachim/jamie-test.git"
   }
+  
 }

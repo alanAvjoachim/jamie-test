@@ -4,8 +4,8 @@
       class="bg-white rounded-full h-9 w-9 flex justify-center items-center hover:bg-slate-100 cursor-pointer mr-4"
       @click="speakers.isPlaying ? pause() : play()"
     >
-      <img v-if="speakers.isPlaying" src="pause_audio.png" class="w-5" />
-      <img v-else src="play_audio.png" class="w-5" />
+      <img v-if="speakers.isPlaying" src="/pause_audio.png" class="w-5" />
+      <img v-else src="/play_audio.png" class="w-5" />
     </div>
     <TheTextInput
       class="max-w-md"
