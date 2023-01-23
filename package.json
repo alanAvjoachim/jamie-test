@@ -26,8 +26,8 @@
   "dependencies": {
     "audioconcat": "^0.1.4",
     "concurrently": "^7.5.0",
-    "electron-builder-squirrel-windows": "^24.0.0-alpha.10"
-  },
-  "build": "electron-builder build --win --publish never",
-  "deploy": "electron-builder build --win --publish always"
+    "electron-builder-squirrel-windows": "^24.0.0-alpha.10",
+    "gh-release": "^7.0.2"
+  }
+  
 }
