@@ -13,7 +13,7 @@ import {
   globalShortcut,
   powerMonitor,
   autoUpdater,
-  dialog 
+  dialog
 } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import { menubar } from "menubar";
@@ -526,10 +526,10 @@ if (!process.env.WEBPACK_DEV_SERVER_URL) {
 const log = require("electron-log");
 
 function checkForAutoUpdates() {
-  const server = "https://jamie-update-server.vercel.app/";
-  const url = `${server}update/${process.platform}/${app.getVersion()}`;
-  // autoUpdater.setFeedURL(url);
-  const currentAppVersion = app.getVersion();
+  // const server = "https://jamie-update-server.vercel.app/";
+  // const url = `${server}update/${process.platform}/${app.getVersion()}`;
+  // // autoUpdater.setFeedURL(url);
+  // const currentAppVersion = app.getVersion();
 }
 
 function splitAppVersion(appVersion) {
@@ -553,6 +553,11 @@ function splitAppVersion(appVersion) {
 
 log.warn("Common log....");
 
+const server = "https://jamie-update-server.vercel.app/";
+const url = `${server}update/${process.platform}/${app.getVersion()}`;
+autoUpdater.setFeedURL(url);
+const currentAppVersion = app.getVersion();
+
 setInterval(() => {
   autoUpdater
     .checkForUpdates()
@@ -569,17 +574,17 @@ setInterval(() => {
 autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
   log.warn("releaseName: ", releaseName);
   const dialogOpts = {
-    type: 'info',
-    buttons: ['Restart', 'Later'],
-    title: 'Application Update',
-    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    type: "info",
+    buttons: ["Restart", "Later"],
+    title: "Application Update",
+    message: process.platform === "win32" ? releaseNotes : releaseName,
     detail:
-      'A new version has been downloaded. Restart the application to apply the updates.',
-  }
+      "A new version has been downloaded. Restart the application to apply the updates."
+  };
 
   dialog.showMessageBox(dialogOpts).then((returnValue) => {
-    if (returnValue.response === 0) autoUpdater.quitAndInstall()
-  })
+    if (returnValue.response === 0) autoUpdater.quitAndInstall();
+  });
   if (currentAppVersion != releaseName) {
     const splitCurrentAppVersionResponse = splitAppVersion(currentAppVersion);
     const splitUpdatedAppVersionResponse = splitAppVersion(releaseName);
