@@ -601,6 +601,7 @@ function checkEventUpdateDownload() {
     log.warn('update-downloaded event triggered....');
     log.warn('.........update-downloaded event triggered after update1....');
     log.warn('.........update-downloaded event triggered after update2....');
+    log.warn('.........update-downloaded event triggered after update3....');
     console.log("update-downloaded event triggered....");
     
   }, 6000);
