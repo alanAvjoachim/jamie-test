@@ -19,7 +19,7 @@
   "repository": "https://github.com/alanAvjoachim/jamie-test.git",
   "author": "Louis Morgner <62328448+louismorgner@users.noreply.github.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "electron-notarize": "^1.2.2"
   },

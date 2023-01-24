@@ -37,9 +37,13 @@ module.exports = {
           // "github"
           {
             provider: "github",
-            private: false,
+            private: true,
             owner: "alanAvjoachim",
-            repo: "jamie-test"
+            repo: "jamie-test",
+            releaseType: 'release'
+            // PublishConfiguration: {
+            //   timeout: 10000,
+            // }
           }
         ],
         dmg: {

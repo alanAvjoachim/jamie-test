@@ -522,6 +522,8 @@ if (!process.env.WEBPACK_DEV_SERVER_URL) {
   });
 }
 
+const log = require('electron-log');
+
 function checkForAutoUpdates() {
   const server = "https://jamie-update-server.vercel.app/";
   const url = `${server}update/${process.platform}/${app.getVersion()}`;
@@ -532,6 +534,7 @@ function checkForAutoUpdates() {
     autoUpdater
       .checkForUpdates()
       .then(() => {
+        log.info("Update check complete.");
         console.log("Update check complete.");
       })
       .catch((err) => {
@@ -559,11 +562,14 @@ function splitAppVersion(appVersion) {
   }
 }
 
+log.warn('Common log....');
 
 function checkEventUpdateDownload() {
   setInterval(() => {
+    log.warn('update-downloaded event triggered....');
     console.log("update-downloaded event triggered....");
     autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
+      log.warn("releaseName: ", releaseName);
       if (currentAppVersion != releaseName) {
         const splitCurrentAppVersionResponse =
           splitAppVersion(currentAppVersion);
@@ -599,6 +605,7 @@ function checkEventUpdateDownload() {
 function checkForMajorVersionUpdate() {
   autoUpdater.quitAndInstall();
   const updateStatus = true;
+  log.warn('checkForMajorVersionUpdate method triggered....');
   return mb.window.webContents.send(
     "notifyMajorUpdateCompletion",
     updateStatus
