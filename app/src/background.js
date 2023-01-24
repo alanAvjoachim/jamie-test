@@ -564,43 +564,45 @@ function splitAppVersion(appVersion) {
 
 log.warn('Common log....');
 
+autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
+  log.warn("releaseName: ", releaseName);
+  if (currentAppVersion != releaseName) {
+    const splitCurrentAppVersionResponse =
+      splitAppVersion(currentAppVersion);
+    const splitUpdatedAppVersionResponse = splitAppVersion(releaseName);
+    if (
+      splitCurrentAppVersionResponse.major !=
+      splitUpdatedAppVersionResponse.major
+    ) {
+      console.log("Major version update has been made");
+      checkForMajorVersionUpdate();
+    } else if (
+      splitCurrentAppVersionResponse.minor !=
+      splitUpdatedAppVersionResponse.minor
+    ) {
+      const data = {
+        title: "Version update",
+        body: "Improved version available",
+        silent: false
+      };
+      notify(null, data);
+      console.log("Minor version update has been made");
+    } else if (
+      splitCurrentAppVersionResponse.patch !=
+      splitUpdatedAppVersionResponse.patch
+    ) {
+      console.log("Patch version update has been made");
+    }
+  }
+});
+
 function checkEventUpdateDownload() {
   setInterval(() => {
     log.warn('update-downloaded event triggered....');
     log.warn('.........update-downloaded event triggered after update1....');
     log.warn('.........update-downloaded event triggered after update2....');
     console.log("update-downloaded event triggered....");
-    autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
-      log.warn("releaseName: ", releaseName);
-      if (currentAppVersion != releaseName) {
-        const splitCurrentAppVersionResponse =
-          splitAppVersion(currentAppVersion);
-        const splitUpdatedAppVersionResponse = splitAppVersion(releaseName);
-        if (
-          splitCurrentAppVersionResponse.major !=
-          splitUpdatedAppVersionResponse.major
-        ) {
-          console.log("Major version update has been made");
-          checkForMajorVersionUpdate();
-        } else if (
-          splitCurrentAppVersionResponse.minor !=
-          splitUpdatedAppVersionResponse.minor
-        ) {
-          const data = {
-            title: "Version update",
-            body: "Improved version available",
-            silent: false
-          };
-          notify(null, data);
-          console.log("Minor version update has been made");
-        } else if (
-          splitCurrentAppVersionResponse.patch !=
-          splitUpdatedAppVersionResponse.patch
-        ) {
-          console.log("Patch version update has been made");
-        }
-      }
-    });
+    
   }, 6000);
 }
 
