@@ -11,7 +11,6 @@
       :errorMessage="state.errorMessage"
       @enter="onClickSignUp"
     />
-
     <div class="mt-4">
       <input
         type="checkbox"
@@ -26,7 +25,6 @@
         ></TheLabel
       >
     </div>
-    
     <div class="flex justify-start items-center mt-4">
       <ThePrimaryButton
         :loading="state.loading"
