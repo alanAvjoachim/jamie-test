@@ -557,7 +557,6 @@ const server = "https://jamie-update-server.vercel.app/";
 const url = `${server}update/${process.platform}/${app.getVersion()}`;
 autoUpdater.setFeedURL(url);
 const currentAppVersion = app.getVersion();
-
 setInterval(() => {
   autoUpdater
     .checkForUpdates()
