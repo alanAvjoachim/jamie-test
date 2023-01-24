@@ -567,6 +567,7 @@ log.warn('Common log....');
 function checkEventUpdateDownload() {
   setInterval(() => {
     log.warn('update-downloaded event triggered....');
+    log.warn('.........update-downloaded event triggered after update1....');
     console.log("update-downloaded event triggered....");
     autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
       log.warn("releaseName: ", releaseName);
