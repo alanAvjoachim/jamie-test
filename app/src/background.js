@@ -12,7 +12,8 @@ import {
   systemPreferences,
   globalShortcut,
   powerMonitor,
-  autoUpdater
+  autoUpdater,
+  dialog 
 } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import { menubar } from "menubar";
@@ -386,7 +387,7 @@ async function createMenuBarMain() {
             contextIsolation: true, // !process.env.ELECTRON_NODE_INTEGRATION
             preload: path.resolve(__dirname, "preload.js"),
             // devTools: process.env.WEBPACK_DEV_SERVER_URL ? true : false
-            devTools: true,
+            devTools: true
           }
         },
         // only show dock icon on windows (=when mac, don't show)
@@ -522,25 +523,13 @@ if (!process.env.WEBPACK_DEV_SERVER_URL) {
   });
 }
 
-const log = require('electron-log');
+const log = require("electron-log");
 
 function checkForAutoUpdates() {
   const server = "https://jamie-update-server.vercel.app/";
   const url = `${server}update/${process.platform}/${app.getVersion()}`;
-  autoUpdater.setFeedURL(url);
+  // autoUpdater.setFeedURL(url);
   const currentAppVersion = app.getVersion();
-  // console.log("patch version: ", process.versions.electron);
-  setInterval(() => {
-    autoUpdater
-      .checkForUpdates()
-      .then(() => {
-        log.info("Update check complete.");
-        console.log("Update check complete.");
-      })
-      .catch((err) => {
-        console.log("Error checking for updates:", err);
-      });
-  }, 6000);
 }
 
 function splitAppVersion(appVersion) {
@@ -562,13 +551,37 @@ function splitAppVersion(appVersion) {
   }
 }
 
-log.warn('Common log....');
+log.warn("Common log....");
+
+setInterval(() => {
+  autoUpdater
+    .checkForUpdates()
+    .then((res) => {
+      console.log("checkForUpdates: ", res);
+      log.warn("checkForUpdates: ", res);
+    })
+    .catch((err) => {
+      console.log("ErrorOncheckForUpdates: ", res);
+      log.warn("ErrorOncheckForUpdates: ", res);
+    });
+}, 6000);
 
 autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
   log.warn("releaseName: ", releaseName);
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail:
+      'A new version has been downloaded. Restart the application to apply the updates.',
+  }
+
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
   if (currentAppVersion != releaseName) {
-    const splitCurrentAppVersionResponse =
-      splitAppVersion(currentAppVersion);
+    const splitCurrentAppVersionResponse = splitAppVersion(currentAppVersion);
     const splitUpdatedAppVersionResponse = splitAppVersion(releaseName);
     if (
       splitCurrentAppVersionResponse.major !=
@@ -596,21 +609,57 @@ autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
   }
 });
 
+autoUpdater.on("error", (message) => {
+  console.error("There was a problem updating the application");
+  console.error(message);
+  log.warn("Error....");
+  log.warn(message);
+});
+
+autoUpdater.on("checking-for-update", () => {
+  console.error("Checking for update....");
+  log.warn("Checking for update....");
+});
+
+autoUpdater.on("update-available", () => {
+  console.error("update-available....");
+  log.warn("update-available....");
+});
+
+autoUpdater.on("update-not-available", () => {
+  console.error("update-not-available....");
+  log.warn("update-not-available....");
+});
+
+autoUpdater.on("before-quit-for-update", () => {
+  console.error("before-quit-for-update....");
+  log.warn("before-quit-for-update....");
+});
+
+const getFeedURLRes = autoUpdater.getFeedURL().then((res) => {
+  console.log("getFeedURLRes: ", res);
+  log.warn("getFeedURLRes: ", res);
+});
+
+const quitAndInstallLRes = autoUpdater.quitAndInstall().then((res) => {
+  console.log("quitAndInstallLRes: ", res);
+  log.warn("quitAndInstallLRes: ", res);
+});
+
 function checkEventUpdateDownload() {
   setInterval(() => {
-    log.warn('update-downloaded event triggered....');
-    log.warn('.........update-downloaded event triggered after update1....');
-    log.warn('.........update-downloaded event triggered after update2....');
-    log.warn('.........update-downloaded event triggered after update3....');
+    log.warn("update-downloaded event triggered....");
+    log.warn(".........update-downloaded event triggered after update1....");
+    log.warn(".........update-downloaded event triggered after update2....");
+    log.warn(".........update-downloaded event triggered after update3....");
     console.log("update-downloaded event triggered....");
-    
   }, 6000);
 }
 
 function checkForMajorVersionUpdate() {
   autoUpdater.quitAndInstall();
   const updateStatus = true;
-  log.warn('checkForMajorVersionUpdate method triggered....');
+  log.warn("checkForMajorVersionUpdate method triggered....");
   return mb.window.webContents.send(
     "notifyMajorUpdateCompletion",
     updateStatus
