@@ -10,9 +10,12 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "preview": "vite preview --port 4173"
+    "preview": "vite preview --port 4173",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
-  "main": "background.js",
+  "main": "src/background.js",
   "author": "jamie <hey@meetjamie.ai> (https://meetjamie.ai/)",
   "dependencies": {
     "@headlessui/vue": "^1.7.3",
@@ -44,6 +47,10 @@
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/cli": "^5.0.8",
     "autoprefixer": "^10.4.12",
